@@ -2,8 +2,13 @@ package edu.msu.keifcame.decisionmaker;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 public class DecisionMakerActivity extends Activity {
 
@@ -22,6 +27,13 @@ public class DecisionMakerActivity extends Activity {
    
    // Handles an add choice click
    public void onClickAddChoice( View v ) {
+      LinearLayout choicesContainer = (LinearLayout) findViewById( R.id.choices_container );
+      
+      EditText choiceBox = new EditText( this );
+      choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
+      choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
+      
+      choicesContainer.addView( choiceBox );
    }
    
    // Handles an add choice click
