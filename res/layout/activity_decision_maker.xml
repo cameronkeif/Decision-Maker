@@ -60,4 +60,11 @@
             android:onClick="onClickReset" />
         
     </LinearLayout>
+    
+    <TextView
+        android:id="@+id/selectionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
 </LinearLayout>

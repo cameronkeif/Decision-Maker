@@ -1,5 +1,7 @@
 package edu.msu.keifcame.decisionmaker;
 
+import java.util.Random;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -8,13 +10,17 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class DecisionMakerActivity extends Activity {
-
+   LinearLayout mChoicesContainer;
+   
    @Override
    protected void onCreate( Bundle savedInstanceState ) {
       super.onCreate( savedInstanceState );
       setContentView( R.layout.activity_decision_maker );
+      
+      mChoicesContainer = (LinearLayout) findViewById( R.id.choices_container );
    }
 
    @Override
@@ -26,19 +32,31 @@ public class DecisionMakerActivity extends Activity {
    
    // Handles an add choice click
    public void onClickAddChoice( View v ) {
-      LinearLayout choicesContainer = (LinearLayout) findViewById( R.id.choices_container );
-      
       EditText choiceBox = new EditText( this );
       choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
       choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
       choiceBox.requestFocus();
       
-      choicesContainer.addView( choiceBox );
+      mChoicesContainer.addView( choiceBox );
    }
    
    // Handles an add choice click
    public void onClickMakeDecision( View v ) {
+      int numberOfChoices = mChoicesContainer.getChildCount();
       
+      // Select an index in range [0, numberOfChoices)
+      Random rand = new Random();
+      int selection = rand.nextInt( numberOfChoices );
+      
+      View choiceBox = mChoicesContainer.getChildAt( selection );
+      
+      String choice = " ";
+      if ( choiceBox instanceof EditText ) {
+         choice += ( (EditText) choiceBox ).getText().toString();
+      }
+
+      TextView selectionText = (TextView) findViewById( R.id.selectionText );
+      selectionText.setText( getString( R.string.you_should ) + choice );
    }
    
    // Handles an add choice click
