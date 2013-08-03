@@ -1,14 +1,60 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DecisionMakerActivity" >
 
     <TextView
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
-
-</RelativeLayout>
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:text="@string/instructions" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+         <LinearLayout
+	        android:id="@+id/choices_container"
+	        android:layout_width="match_parent" 
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+         
+         <EditText 
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:inputType="text" />
+         
+         </LinearLayout>
+    </ScrollView>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <Button
+            android:id="@+id/add_choice_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/add_choice" />
+        
+        <Button
+            android:id="@+id/make_decision_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/make_decision" />
+        
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/reset" />
+        
+    </LinearLayout>
+</LinearLayout>
