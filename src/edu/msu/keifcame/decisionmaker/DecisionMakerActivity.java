@@ -31,6 +31,7 @@ public class DecisionMakerActivity extends Activity {
       EditText choiceBox = new EditText( this );
       choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
       choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
+      choiceBox.requestFocus();
       
       choicesContainer.addView( choiceBox );
    }
