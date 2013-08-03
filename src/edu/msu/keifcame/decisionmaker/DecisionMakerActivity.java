@@ -32,12 +32,7 @@ public class DecisionMakerActivity extends Activity {
    
    // Handles an add choice click
    public void onClickAddChoice( View v ) {
-      EditText choiceBox = new EditText( this );
-      choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
-      choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
-      choiceBox.requestFocus();
-      
-      mChoicesContainer.addView( choiceBox );
+      addChoiceBox();
    }
    
    // Handles an add choice click
@@ -61,7 +56,19 @@ public class DecisionMakerActivity extends Activity {
    
    // Handles an add choice click
    public void onClickReset( View v ) {
+      mChoicesContainer.removeAllViews();
+      addChoiceBox();
       
+      TextView selectionText = (TextView) findViewById( R.id.selectionText );
+      selectionText.setText( "" );
    }
-
+   
+   private void addChoiceBox() {
+      EditText choiceBox = new EditText( this );
+      choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
+      choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
+      choiceBox.requestFocus();
+      
+      mChoicesContainer.addView( choiceBox );
+   }
 }
