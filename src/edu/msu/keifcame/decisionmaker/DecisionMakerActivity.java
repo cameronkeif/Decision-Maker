@@ -1,5 +1,6 @@
 package edu.msu.keifcame.decisionmaker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import android.app.Activity;
@@ -15,12 +16,35 @@ import android.widget.TextView;
 public class DecisionMakerActivity extends Activity {
    LinearLayout mChoicesContainer;
    
-   @Override
+   private static final String CHOICES = "edu.msu.keifcame.decisionmaker.choices";
+   
    protected void onCreate( Bundle savedInstanceState ) {
       super.onCreate( savedInstanceState );
       setContentView( R.layout.activity_decision_maker );
       
       mChoicesContainer = (LinearLayout) findViewById( R.id.choices_container );
+      
+      if ( savedInstanceState != null ) {
+         ArrayList<String> choices = savedInstanceState.getStringArrayList( CHOICES );
+         
+         for ( String choice : choices ) {
+            addChoiceBox( choice );
+         }
+      } else {
+         addChoiceBox();
+      }
+   }
+   
+   @Override
+   public void onSaveInstanceState( Bundle outState ) {
+      ArrayList<String> choices = new ArrayList<String>();
+      
+      int numberOfChoices = mChoicesContainer.getChildCount();
+      for ( int i = 0; i < numberOfChoices; i++ ) {
+         choices.add( ( (EditText) mChoicesContainer.getChildAt( i ) ).getText().toString() );
+      }
+      
+      outState.putStringArrayList( CHOICES, choices );
    }
 
    @Override
@@ -63,12 +87,25 @@ public class DecisionMakerActivity extends Activity {
       selectionText.setText( "" );
    }
    
-   private void addChoiceBox() {
+   private EditText addChoiceBox() {
       EditText choiceBox = new EditText( this );
       choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
-      choiceBox.setInputType( InputType.TYPE_TEXT_VARIATION_NORMAL );
       choiceBox.requestFocus();
       
       mChoicesContainer.addView( choiceBox );
+      
+      return choiceBox;
+   }
+   
+   // When rotating, we want to keep the text in its box. This method is similar to the above, but adds that text in.
+   private EditText addChoiceBox( String choice ) {
+      EditText choiceBox = new EditText( this );
+      choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
+      choiceBox.setText( choice );
+      choiceBox.requestFocus();
+      
+      mChoicesContainer.addView( choiceBox );
+      
+      return choiceBox;
    }
 }
