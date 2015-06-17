@@ -58,7 +58,7 @@ public class DecisionMakerActivity extends Activity {
       addChoiceBox();
    }
    
-   // Handles an add choice click
+   // Handles a make decision click
    public void onClickMakeDecision( View v ) {
       int numberOfChoices = mChoicesContainer.getChildCount();
       
@@ -77,15 +77,16 @@ public class DecisionMakerActivity extends Activity {
       selectionText.setText( getString( R.string.you_should ) + choice );
    }
    
-   // Handles an add choice click
+   // Handles a reset click
    public void onClickReset( View v ) {
       mChoicesContainer.removeAllViews();
       addChoiceBox();
       
       TextView selectionText = (TextView) findViewById( R.id.selectionText );
-      selectionText.setText( "" );
+      selectionText.setText( "" ); // clears the text
    }
    
+   // Dynamically adds another text entry box for another decision.
    private EditText addChoiceBox() {
       EditText choiceBox = new EditText( this );
       choiceBox.setLayoutParams( new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT ) );
